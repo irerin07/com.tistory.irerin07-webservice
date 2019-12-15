@@ -3,13 +3,14 @@ package sprinboot.domain.posts;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import sprinboot.domain.BaseTimeEntity;
 
 import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor// 기본 생성자 자동 추가
 @Entity //테이블와 링크될 클래스임을 명시한다. 언더스코어 네이밍으로 테이블 이름을 매칭
-public class Posts {
+public class Posts extends BaseTimeEntity {
 
     @Id //해당 테이블의 PK 필드를 나타낸다.
     @GeneratedValue(strategy = GenerationType.IDENTITY) //PK의 생성규칙을 명시. 스프링 부트 2.0부터는 GenerationType을 Identity로 해줘야 한다.
