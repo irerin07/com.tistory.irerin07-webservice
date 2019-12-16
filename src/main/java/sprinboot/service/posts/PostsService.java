@@ -2,14 +2,16 @@ package sprinboot.service.posts;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sprinboot.domain.posts.Posts;
 import sprinboot.domain.posts.PostsRepository;
+import sprinboot.web.dto.PostsListResponseDto;
 import sprinboot.web.dto.PostsResponseDto;
 import sprinboot.web.dto.PostsSaveRequestDto;
 import sprinboot.web.dto.PostsUpdateRequestDto;
 
-import javax.persistence.PostRemove;
-import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -35,5 +37,10 @@ public class PostsService {
     public PostsResponseDto findById (Long id) {
         Posts entity = postsRepository.findById(id).orElseThrow(()->new IllegalArgumentException("no such use id = " + id));
         return new PostsResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream().map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 }
