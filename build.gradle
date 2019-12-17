@@ -34,6 +34,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('com.h2database:h2')
     compile('org.springframework.boot:spring-boot-starter-mustache')
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+    compile('org.springframework.session:spring-session-jdbc')
 //    compileOnly 'org.projectlombok:lombok:1.18.10' //Gradle 5.0이상부터는 위의 한줄 대신 이 두 코드를 사용해야한다.
 //    annotationProcessor 'org.projectlombok:lombok:1.18.10'
     testCompile('org.springframework.boot:spring-boot-starter-test')
