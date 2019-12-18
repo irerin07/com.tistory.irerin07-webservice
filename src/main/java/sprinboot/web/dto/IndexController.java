@@ -20,11 +20,9 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
-
-        if(user != null){
+        if (user != null) {
             model.addAttribute("userName", user.getName());
         }
-
         return "index";
     }
 
@@ -34,9 +32,10 @@ public class IndexController {
     }
 
     @GetMapping("/posts/update/{id}")
-    public String postsUpdate(@PathVariable Long id, Model model){
+    public String postsUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);
-        return"posts-update";
+
+        return "posts-update";
     }
 }
