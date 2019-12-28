@@ -15,7 +15,7 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r com.tistory.irerin07-webservice
+  - zip -r com.tistory.irerin07-webservice *
   - mkdir -p deploy
   - mv com.tistory.irerin07-webservice.zip deploy/com.tistory.irerin07-webservice.zip
 
