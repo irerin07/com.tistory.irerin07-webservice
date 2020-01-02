@@ -1,4 +1,4 @@
-package sprinboot.web.dto;
+package sprinboot.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import sprinboot.config.auth.LoginUser;
 import sprinboot.config.auth.dto.SessionUser;
 import sprinboot.service.posts.PostsService;
-
-import javax.servlet.http.HttpSession;
+import sprinboot.web.dto.PostsResponseDto;
 
 @RequiredArgsConstructor
 @Controller
@@ -22,7 +21,6 @@ public class IndexController {
         model.addAttribute("posts", postsService.findAllDesc());
         if (user != null) {
             model.addAttribute("userName", user.getName());
-            System.out.println(user.getName());
         }
         return "index";
     }
