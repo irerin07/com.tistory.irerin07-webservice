@@ -1,0 +1,24 @@
+{{>layout/header}}
+
+<h1>내가만든게시판좋은스프링게시판ver.2.1</h1>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            {{#userName}}
+                <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
+                Logged in as: <span id="user">{{userName}}</span>
+                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+            {{/userName}}
+            {{^userName}}
+                <a href="/oauth2/authorization/google" class="btn btn-secondary active" role="button">Google Login</a>
+                <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
+                <a href="/signin" class="btn btn-secondary active" role="button">Login</a>
+                <a href="/signup" class="btn btn-secondary active" role="button">Signup</a>
+            {{/userName}}
+        </div>
+    </div>
+    <br>
+    <h3>회원가입</h3>
+</div>
+
+{{>layout/footer}}
