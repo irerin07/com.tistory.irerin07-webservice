@@ -4,11 +4,11 @@
 <div class="col-md-12">
     <div class="row">
         <div class="col-md-6">
-            {{#userName}}
-                <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
-                Logged in as: <span id="user">{{userName}}</span>
-                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
-            {{/userName}}
+<!--            {{#userName}}-->
+<!--                <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>-->
+<!--                Logged in as: <span id="user">{{userName}}</span>-->
+<!--                <a href="/logout" class="btn btn-info active" role="button">Logout</a>-->
+<!--            {{/userName}}-->
             {{^userName}}
                 <a href="/oauth2/authorization/google" class="btn btn-secondary active" role="button">Google Login</a>
                 <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
@@ -19,6 +19,14 @@
     </div>
     <br>
     <h3>회원가입</h3>
+    <br>
+    <form>
+        <input type="text" class="form-control" name="name" placeholder="이름" title="이름" autocomplete="off">
+        <input type="text" class="form-control" name="email" id="email" placeholder="이메일 주소"
+               title="이메일" autocomplete="off">
+        <input type="text" class="form-control" name="passwd" id="passwd" placeholder="비밀번호"
+               title="비밀번호" autocomplete="off">
+    </form>
 </div>
 
 {{>layout/footer}}
