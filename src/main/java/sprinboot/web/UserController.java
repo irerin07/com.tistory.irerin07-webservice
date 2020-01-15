@@ -2,13 +2,28 @@ package sprinboot.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sprinboot.domain.user.User;
+import sprinboot.service.users.UserService;
 
 @Controller
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
+
+    private final UserService userService;
+
+    @PostMapping("/join")
+    public String join(BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "join";
+        }
+        User userByEmail = userService.getUserByEmail();
+
+        return "signin";
+    }
 
 //    @PostMapping("/join")
 //    public String join(@Valid UserJoinForm userJoinForm, BindingResult bindingResult, HttpSession session) {
