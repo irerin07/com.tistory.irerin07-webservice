@@ -5,8 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sprinboot.domain.user.User;
 import sprinboot.domain.user.UserRepository;
-import sprinboot.web.dto.PostsSaveRequestDto;
 import sprinboot.web.dto.UserSaveRequestDto;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -20,8 +21,8 @@ public class UserService {
         return userRepository.save(requestDto.toEntity()).getId();
     }
 
-    public User getUserByEmail() {
+    public Optional<User> getUserByEmail(String email) {
 
-        return null;
+        return userRepository.findByEmail(email);
     }
 }

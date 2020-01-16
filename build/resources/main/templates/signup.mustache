@@ -12,7 +12,7 @@
             {{^userName}}
                 <a href="/oauth2/authorization/google" class="btn btn-secondary active" role="button">Google Login</a>
                 <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
-                <a href="/signin" class="btn btn-secondary active" role="button">Login</a>
+                <a href="/signin" class="btn btn-secondary active" role="button">Signin</a>
                 <a href="/signup" class="btn btn-secondary active" role="button">Signup</a>
             {{/userName}}
         </div>
@@ -20,12 +20,14 @@
     <br>
     <h3>회원가입</h3>
     <br>
-    <form>
+    <form method="post" action="/users/join">
         <input type="text" class="form-control" name="name" placeholder="이름" title="이름" autocomplete="off">
         <input type="text" class="form-control" name="email" id="email" placeholder="이메일 주소"
                title="이메일" autocomplete="off">
         <input type="text" class="form-control" name="passwd" id="passwd" placeholder="비밀번호"
                title="비밀번호" autocomplete="off">
+
+        <button type="submit" class="btn btn-dark topBtn"> 회원가입</button>
     </form>
 </div>
 

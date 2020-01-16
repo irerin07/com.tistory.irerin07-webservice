@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sprinboot.domain.user.User;
 import sprinboot.service.users.UserService;
+import sprinboot.web.dto.UserJoinFormDto;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
@@ -14,13 +17,14 @@ import sprinboot.service.users.UserService;
 public class UserController {
 
     private final UserService userService;
+    private final UserJoinFormDto userJoinFormDto;
 
     @PostMapping("/join")
     public String join(BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             return "join";
         }
-        User userByEmail = userService.getUserByEmail();
+        Optional<User> userByEmail = userService.getUserByEmail(userJoinFormDto.getEmail());
 
         return "signin";
     }
