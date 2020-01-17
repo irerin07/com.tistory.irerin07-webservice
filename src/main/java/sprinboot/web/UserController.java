@@ -9,6 +9,7 @@ import sprinboot.domain.user.User;
 import sprinboot.service.users.UserService;
 import sprinboot.web.dto.UserJoinFormDto;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -17,10 +18,9 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
-    private final UserJoinFormDto userJoinFormDto;
 
     @PostMapping("/join")
-    public String join(BindingResult bindingResult) {
+    public String join(@Valid UserJoinFormDto userJoinFormDto, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             return "join";
         }
