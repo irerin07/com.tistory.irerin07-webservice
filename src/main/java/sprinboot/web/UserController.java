@@ -3,11 +3,15 @@ package sprinboot.web;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sprinboot.domain.user.User;
 import sprinboot.service.users.UserService;
+import sprinboot.web.dto.PostsSaveRequestDto;
 import sprinboot.web.dto.UserJoinFormDto;
+import sprinboot.web.dto.UserSaveRequestDto;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -20,14 +24,28 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/join")
-    public String join(@Valid UserJoinFormDto userJoinFormDto, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
-            return "join";
-        }
-        Optional<User> userByEmail = userService.getUserByEmail(userJoinFormDto.getEmail());
-
-        return "signin";
+    public Long save(@RequestBody UserSaveRequestDto requestDto){
+        return userService.save(requestDto);
     }
+
+//    @PostMapping("/join")
+//    public String join(@Valid UserJoinFormDto userJoinFormDto, BindingResult bindingResult) {
+//        if(bindingResult.hasErrors()){
+//            return "join";
+//        }
+//        Optional<User> userByEmail = userService.getUserByEmail(userJoinFormDto.getEmail());
+//        if(userByEmail.isPresent()){
+//            FieldError error = new FieldError("userJoinForm", "email", "중복된 이메일이 있습니다");
+//            bindingResult.addError(error);
+//            return "users/joinform";
+//
+//        } else {
+//            User user = new User();
+//            userService.addUser(user);
+//        }
+//
+//        return "signin";
+//    }
 
 //    @PostMapping("/join")
 //    public String join(@Valid UserJoinForm userJoinForm, BindingResult bindingResult, HttpSession session) {
