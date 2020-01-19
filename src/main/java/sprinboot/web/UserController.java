@@ -1,6 +1,8 @@
 package sprinboot.web;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -23,29 +25,33 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/join")
-    public Long save(@RequestBody UserSaveRequestDto requestDto){
-        return userService.save(requestDto);
-    }
-
 //    @PostMapping("/join")
-//    public String join(@Valid UserJoinFormDto userJoinFormDto, BindingResult bindingResult) {
-//        if(bindingResult.hasErrors()){
-//            return "join";
-//        }
-//        Optional<User> userByEmail = userService.getUserByEmail(userJoinFormDto.getEmail());
-//        if(userByEmail.isPresent()){
-//            FieldError error = new FieldError("userJoinForm", "email", "중복된 이메일이 있습니다");
-//            bindingResult.addError(error);
-//            return "users/joinform";
-//
-//        } else {
-//            User user = new User();
-//            userService.addUser(user);
-//        }
-//
-//        return "signin";
+//    public Long save(@RequestBody UserSaveRequestDto requestDto){
+//        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//        user.setPasswd(passwordEncoder.encode(user.getPasswd()));
+//        return userService.save(requestDto);
 //    }
+
+    @PostMapping("/join")
+    public String join(@Valid UserJoinFormDto userJoinFormDto, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "signup";
+        }
+        Optional<User> userByEmail = userService.getUserByEmail(userJoinFormDto.getEmail());
+        if(userByEmail.isPresent()){
+            FieldError error = new FieldError("userJoinForm", "email", "중복된 이메일이 있습니다");
+            bindingResult.addError(error);
+            return "/index";
+
+        } else {
+            User user = new User();
+            PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
+            userService.addUser(user);
+        }
+
+        return "/signin";
+    }
 
 //    @PostMapping("/join")
 //    public String join(@Valid UserJoinForm userJoinForm, BindingResult bindingResult, HttpSession session) {
