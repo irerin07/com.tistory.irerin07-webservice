@@ -1,6 +1,8 @@
 package sprinboot.web;
 
 import lombok.RequiredArgsConstructor;
+import net.minidev.json.JSONUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -25,71 +27,10 @@ public class UserController {
 
     private final UserService userService;
 
-//    @PostMapping("/join")
-//    public Long save(@RequestBody UserSaveRequestDto requestDto){
-//        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//        user.setPasswd(passwordEncoder.encode(user.getPasswd()));
-//        return userService.save(requestDto);
-//    }
-
     @PostMapping("/join")
-    public String join(@Valid UserJoinFormDto userJoinFormDto, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
-            return "signup";
-        }
-        Optional<User> userByEmail = userService.getUserByEmail(userJoinFormDto.getEmail());
-        if(userByEmail.isPresent()){
-            FieldError error = new FieldError("userJoinForm", "email", "중복된 이메일이 있습니다");
-            bindingResult.addError(error);
-            return "/index";
-
-        } else {
-            User user = new User();
-            PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
-            userService.addUser(user);
-        }
+    public String join(@RequestBody UserSaveRequestDto userSaveRequestDto) {
+        userService.save(userSaveRequestDto);
 
         return "/signin";
     }
-
-//    @PostMapping("/join")
-//    public String join(@Valid UserJoinForm userJoinForm, BindingResult bindingResult, HttpSession session) {
-//
-//        if (bindingResult.hasErrors()) {
-//            return "users/joinform";
-//        }
-//
-//        if (!userJoinForm.getPasswd().equals(userJoinForm.getPasswd2())) {
-//            FieldError error = new FieldError("userJoinForm", "passwd2",
-//                    "비밀번호가 일치하지 않습니다.");
-//            bindingResult.addError(error);
-//            return "users/joinform";
-//        }
-//
-//        User userByEmail = userService.getUserByEmail(userJoinForm.getEmail());
-//        if (userByEmail != null) {
-//            FieldError error = new FieldError("userJoinForm", "email", "중복된 이메일이 있습니다");
-//            bindingResult.addError(error);
-//            return "users/joinform";
-//        }
-//
-//        User user = new User();
-//        BeanUtils.copyProperties(userJoinForm, user);
-//
-//
-//        // 비밀번호 암호화
-//        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//        user.setPasswd(passwordEncoder.encode(user.getPasswd()));
-//
-//        // 권한 부여
-//        Role userRole = userService.getUserRole("USER");
-//        user.addUserRole(userRole);
-//
-//        // insert
-//        userService.addUser(user);
-//
-//
-//        return "users/login";
-//    }
 }

@@ -17,17 +17,12 @@ public class UserService {
 
     @Transactional
     public Long save(UserSaveRequestDto requestDto){
-
         return userRepository.save(requestDto.toEntity()).getId();
     }
 
-    public Optional<User> getUserByEmail(String email) {
-
+    @Transactional
+    public Optional<User> findByEmail(String email){
         return userRepository.findByEmail(email);
     }
 
-    public void addUser(User user) {
-        userRepository.save(user);
-
-    }
 }
