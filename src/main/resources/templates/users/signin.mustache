@@ -4,35 +4,31 @@
 <div class="col-md-12">
     <div class="row">
         <div class="col-md-6">
-<!--            {{#userName}}-->
-<!--                <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>-->
-<!--                Logged in as: <span id="user">{{userName}}</span>-->
-<!--                <a href="/logout" class="btn btn-info active" role="button">Logout</a>-->
-<!--            {{/userName}}-->
+            {{#userName}}
+                <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
+                Logged in as: <span id="user">{{userName}}</span>
+                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+            {{/userName}}
             {{^userName}}
                 <a href="/oauth2/authorization/google" class="btn btn-secondary active" role="button">Google Login</a>
                 <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
-                <a href="/signin" class="btn btn-secondary active" role="button">Signin</a>
+                <a href="/signin" class="btn btn-secondary active" role="button">Login</a>
                 <a href="/signup" class="btn btn-secondary active" role="button">Signup</a>
             {{/userName}}
         </div>
     </div>
     <br>
-    <h3>회원가입</h3>
+    <h3>로그인</h3>
     <br>
-    <form method="post" action="/users/join">
-        <label for="name">name</label>
-        <input type="name" class="form-control" id="name" name="name" placeholder="이름" title="이름" autocomplete="off">
+    <form method="post" action="/users/login">
         <label for="email">email</label>
         <input type="email" class="form-control" id="email" name="email" id="email" placeholder="이메일 주소"
                title="이메일" autocomplete="off">
         <label for="passwd">passwd</label>
         <input type="passwd" class="form-control" id="passwd" name="passwd" id="passwd" placeholder="비밀번호"
                title="비밀번호" autocomplete="off">
-        <input type="hidden" name="picture" id="picture" value="none"/>
-        <input type="hidden" name="role" id="role" value="user"/>
         <a href="/" role="button" class="btn btn-secondary">취소</a>
-        <button type="button" class="btn btn-primary" id="btn-user-save">등록</button>
+        <button type="button" class="btn btn-primary" id="btn-user-signin">로그인</button>
     </form>
 </div>
 
