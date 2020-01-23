@@ -25,14 +25,14 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/signin")
-    public String signin(){
-        return "signin";
+    @GetMapping("/users/login")
+    public String login(){
+        return "/users/login";
     }
 
-    @GetMapping("/signup")
-    public String signup(){
-        return "signup";
+    @GetMapping("/join")
+    public String join(){
+        return "/users/join";
     }
 
     @GetMapping("/posts/save")
